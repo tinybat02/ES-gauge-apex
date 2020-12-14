@@ -1,8 +1,12 @@
 import { DataFrame, Field, Vector } from '@grafana/data';
 
-export interface PanelOptions {}
+export interface PanelOptions {
+  threshold: number;
+}
 
-export const defaults: PanelOptions = {};
+export const defaults: PanelOptions = {
+  threshold: 1040,
+};
 
 export interface Buffer extends Vector {
   buffer: any;

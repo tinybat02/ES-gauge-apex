@@ -1471,30 +1471,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @grafana/ui */ "@grafana/ui");
+/* harmony import */ var _grafana_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__);
+
+ //@ts-ignore
 
 
+var MainEditor = function MainEditor(_a) {
+  var options = _a.options,
+      onOptionsChange = _a.onOptionsChange;
 
-var MainEditor =
-/** @class */
-function (_super) {
-  Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(MainEditor, _super);
+  var _b = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__read"])(Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(options), 2),
+      input = _b[0],
+      setInput = _b[1];
 
-  function MainEditor() {
-    return _super !== null && _super.apply(this, arguments) || this;
-  }
-
-  MainEditor.prototype.render = function () {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-      className: "section gf-form-group"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", {
-      className: "section-heading"
-    }, "Display"));
+  var onSubmit = function onSubmit() {
+    onOptionsChange(input);
   };
 
-  return MainEditor;
-}(react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"]);
-
-
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["PanelOptionsGroup"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "editor-row"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "section gf-form-group"
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_grafana_ui__WEBPACK_IMPORTED_MODULE_2__["FormField"], {
+    label: "Max Threshold",
+    labelWidth: 10,
+    inputWidth: 40,
+    type: "number",
+    name: "threshold",
+    value: input.threshold,
+    onChange: function onChange(e) {
+      return setInput({
+        threshold: parseInt(e.target.value)
+      });
+    }
+  }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+    className: "btn btn-primary",
+    onClick: onSubmit
+  }, "Submit"));
+};
 
 /***/ }),
 
@@ -1571,17 +1586,18 @@ function (_super) {
   MainPanel.prototype.render = function () {
     var _a = this.props,
         width = _a.width,
-        height = _a.height;
+        height = _a.height,
+        threshold = _a.options.threshold;
     var num = this.state.num;
     var min = height > width ? width : height;
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apexcharts__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_apexcharts__WEBPACK_IMPORTED_MODULE_2___default.a, {
       options: {
         plotOptions: {
           radialBar: {
             hollow: {
               margin: 15,
               size: '80%',
-              image: num < 1040 ? _img_go_icon_png__WEBPACK_IMPORTED_MODULE_3___default.a : _img_stop_icon_png__WEBPACK_IMPORTED_MODULE_4___default.a,
+              image: num < threshold ? _img_go_icon_png__WEBPACK_IMPORTED_MODULE_3___default.a : _img_stop_icon_png__WEBPACK_IMPORTED_MODULE_4___default.a,
               imageWidth: min / 2,
               imageHeight: min / 2,
               imageClipped: false
@@ -1601,11 +1617,18 @@ function (_super) {
           }
         }
       },
-      series: [num < 1040 ? num / 10.4 : 100],
+      series: [num < threshold ? num / (threshold / 100) : 100],
       type: "radialBar",
       width: width,
-      height: height
-    });
+      height: height - 35
+    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      style: {
+        fontFamily: 'Brush Script MT, cursive',
+        fontSize: '3em',
+        textAlign: 'center',
+        marginBottom: 10
+      }
+    }, num < threshold ? 'Bitte treten Sie ein !' : 'Bitte warten Sie !'));
   };
 
   return MainPanel;
@@ -1671,7 +1694,9 @@ var plugin = new _grafana_ui__WEBPACK_IMPORTED_MODULE_0__["PanelPlugin"](_MainPa
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaults", function() { return defaults; });
-var defaults = {};
+var defaults = {
+  threshold: 1040
+};
 
 /***/ }),
 

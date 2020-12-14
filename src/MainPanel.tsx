@@ -40,44 +40,53 @@ export class MainPanel extends PureComponent<Props, State> {
   }
 
   render() {
-    const { width, height } = this.props;
+    const {
+      width,
+      height,
+      options: { threshold },
+    } = this.props;
     const { num } = this.state;
 
     const min = height > width ? width : height;
 
     return (
-      <Chart
-        options={{
-          plotOptions: {
-            radialBar: {
-              hollow: {
-                margin: 15,
-                size: '80%',
-                image: num < 1040 ? GoIcon : StopIcon,
-                imageWidth: min / 2,
-                imageHeight: min / 2,
-                imageClipped: false,
-              },
-              dataLabels: {
-                name: {
-                  show: false,
-                  color: '#fff',
+      <div>
+        <Chart
+          options={{
+            plotOptions: {
+              radialBar: {
+                hollow: {
+                  margin: 15,
+                  size: '80%',
+                  image: num < threshold ? GoIcon : StopIcon,
+                  imageWidth: min / 2,
+                  imageHeight: min / 2,
+                  imageClipped: false,
                 },
-                value: {
-                  show: false,
-                  color: '#333',
-                  offsetY: 70,
-                  fontSize: '22px',
+                dataLabels: {
+                  name: {
+                    show: false,
+                    color: '#fff',
+                  },
+                  value: {
+                    show: false,
+                    color: '#333',
+                    offsetY: 70,
+                    fontSize: '22px',
+                  },
                 },
               },
             },
-          },
-        }}
-        series={[num < 1040 ? num / 10.4 : 100]}
-        type="radialBar"
-        width={width}
-        height={height}
-      />
+          }}
+          series={[num < threshold ? num / (threshold / 100) : 100]}
+          type="radialBar"
+          width={width}
+          height={height - 35}
+        />
+        <div style={{ fontFamily: 'Brush Script MT, cursive', fontSize: '3em', textAlign: 'center', marginBottom: 10 }}>
+          {num < threshold ? 'Bitte treten Sie ein !' : 'Bitte warten Sie !'}
+        </div>
+      </div>
     );
   }
 }
