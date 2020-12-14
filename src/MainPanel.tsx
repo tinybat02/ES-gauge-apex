@@ -81,9 +81,9 @@ export class MainPanel extends PureComponent<Props, State> {
           series={[num < threshold ? num / (threshold / 100) : 100]}
           type="radialBar"
           width={width}
-          height={height - 35}
+          height={height - 45}
         />
-        <div style={{ fontFamily: 'Brush Script MT, cursive', fontSize: '3em', textAlign: 'center', marginBottom: 10 }}>
+        <div style={{ fontFamily: 'Brush Script MT, cursive', fontSize: '4em', textAlign: 'center', marginBottom: 10 }}>
           {num < threshold ? 'Bitte treten Sie ein !' : 'Bitte warten Sie !'}
         </div>
       </div>

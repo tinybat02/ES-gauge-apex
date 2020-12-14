@@ -1620,11 +1620,11 @@ function (_super) {
       series: [num < threshold ? num / (threshold / 100) : 100],
       type: "radialBar",
       width: width,
-      height: height - 35
+      height: height - 45
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       style: {
         fontFamily: 'Brush Script MT, cursive',
-        fontSize: '3em',
+        fontSize: '4em',
         textAlign: 'center',
         marginBottom: 10
       }
