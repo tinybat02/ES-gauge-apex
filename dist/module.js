@@ -1628,7 +1628,7 @@ function (_super) {
         textAlign: 'center',
         marginBottom: 10
       }
-    }, num < threshold ? 'Bitte treten Sie ein !' : 'Bitte warten Sie !'));
+    }, num < threshold ? 'Παρακαλώ περάστε !' : 'Παρακαλώ περιμένετε !'));
   };
 
   return MainPanel;

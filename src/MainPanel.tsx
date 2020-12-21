@@ -84,7 +84,7 @@ export class MainPanel extends PureComponent<Props, State> {
           height={height - 45}
         />
         <div style={{ fontFamily: 'Brush Script MT, cursive', fontSize: '4em', textAlign: 'center', marginBottom: 10 }}>
-          {num < threshold ? 'Bitte treten Sie ein !' : 'Bitte warten Sie !'}
+          {num < threshold ? 'Παρακαλώ περάστε !' : 'Παρακαλώ περιμένετε !'}
         </div>
       </div>
     );
