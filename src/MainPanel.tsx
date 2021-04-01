@@ -4,6 +4,7 @@ import { PanelOptions, Frame } from 'types';
 import Chart from 'react-apexcharts';
 import GoIcon from './img/go-icon.png';
 import StopIcon from './img/stop-icon.png';
+import CompanyIcon from './img/Ariadnemaps.png';
 import { processData } from './util/process';
 
 interface Props extends PanelProps<PanelOptions> {}
@@ -50,7 +51,7 @@ export class MainPanel extends PureComponent<Props, State> {
     const min = height > width ? width : height;
 
     return (
-      <div>
+      <div style={{ position: 'relative' }}>
         <Chart
           options={{
             plotOptions: {
@@ -84,8 +85,9 @@ export class MainPanel extends PureComponent<Props, State> {
           height={height - 45}
         />
         <div style={{ fontFamily: 'Brush Script MT, cursive', fontSize: '4em', textAlign: 'center', marginBottom: 10 }}>
-          {num < threshold ? 'Παρακαλώ περάστε !' : 'Παρακαλώ περιμένετε !'}
+          {num < threshold ? 'Bitte treten Sie ein !' : 'Bitte warten Sie !'}
         </div>
+        <img src={CompanyIcon} style={{ width: 100, height: 40, position: 'absolute', bottom: 10, right: 0 }} />
       </div>
     );
   }
